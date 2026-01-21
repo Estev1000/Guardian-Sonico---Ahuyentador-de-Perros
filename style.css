@@ -6,7 +6,8 @@
     --glass-border: rgba(255, 255, 255, 0.1);
     --accent-dog: #00d2ff;
     --accent-manual: #ffd700;
-    --accent-active: #00d2ff; /* Change dynamically via JS */
+    --accent-active: #00d2ff;
+    /* Change dynamically via JS */
     --shadow-glow: 0 0 20px rgba(0, 210, 255, 0.3);
 }
 
@@ -21,7 +22,8 @@ body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     min-height: 100vh;
-    overflow: hidden; /* Prevent scroll on mobile if possible */
+    overflow: hidden;
+    /* Prevent scroll on mobile if possible */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +72,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 /* Header */
@@ -110,7 +112,7 @@ header p {
 .core {
     width: 150px;
     height: 150px;
-    background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.2));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
@@ -118,7 +120,7 @@ header p {
     justify-content: center;
     align-items: center;
     z-index: 2;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
 }
 
@@ -126,7 +128,7 @@ header p {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .ring {
@@ -154,6 +156,7 @@ header p {
         transform: scale(0.9);
         opacity: 1;
     }
+
     100% {
         transform: scale(2.5);
         opacity: 0;
@@ -170,7 +173,7 @@ header p {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .mode-selector {
@@ -181,7 +184,7 @@ header p {
 
 .mode-btn {
     flex: 1;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     padding: 10px 5px;
@@ -195,14 +198,14 @@ header p {
 }
 
 .mode-btn:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .mode-btn.active {
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     border-color: var(--accent-active);
     color: var(--text-primary);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .mode-btn .icon {
@@ -257,6 +260,35 @@ input[type="range"] {
     text-align: center;
     color: var(--text-secondary);
     font-size: 0.8rem;
+}
+
+/* License Display */
+.license-display {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--glass-border);
+    animation: fadeIn 0.8s ease-out;
+}
+
+#license-name {
+    color: var(--accent-active);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+    margin-left: 4px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 footer {

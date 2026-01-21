@@ -21,6 +21,26 @@ class SonicGuardian {
 
         // Bindings
         this.initListeners();
+        this.checkLicense();
+    }
+
+    checkLicense() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientName = urlParams.get('cliente');
+
+        if (clientName) {
+            // Clean simple XSS protection and get name
+            const cleanName = clientName.replace(/[<>]/g, '');
+
+            // 1. Show License Message
+            const container = document.getElementById('license-container');
+            const nameSpan = document.getElementById('license-name');
+            nameSpan.innerText = cleanName;
+            container.style.display = 'block';
+
+            // 2. Personalize App Title (Browser Tab)
+            document.title = `Guardian Sónico - ${cleanName}`;
+        }
     }
 
     initListeners() {
