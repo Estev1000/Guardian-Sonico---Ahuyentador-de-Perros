@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardian Sónico - Ahuyentador de Perros</title>
+    <meta name="description" content="Ahuyentador ultrasónico web para perros.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔊</text></svg>">
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <h1>Guardian<span class="highlight">Sónico</span></h1>
+            <p>Sistema de Defensa Ultrasónica</p>
+        </header>
+
+        <main>
+            <div class="emitter-display">
+                <div id="emitter-ring" class="ring"></div>
+                <div id="emitter-core" class="core">
+                    <span id="hz-display">OFF</span>
+                </div>
+            </div>
+
+            <div class="controls-glass">
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-mode="dog" onclick="selectMode('dog')">
+                        <span class="icon">🐕</span>
+                        <span class="label">Perros</span>
+                    </button>
+                    <button class="mode-btn" data-mode="manual" onclick="selectMode('manual')">
+                        <span class="icon">🎛️</span>
+                        <span class="label">Manual</span>
+                    </button>
+                </div>
+
+                <div class="slider-container" id="manual-controls" style="display: none;">
+                    <label for="freq-slider">Frecuencia: <span id="freq-value">20000</span> Hz</label>
+                    <input type="range" id="freq-slider" min="1000" max="25000" value="20000" step="100">
+                </div>
+
+                <div class="action-area">
+                    <button id="toggle-btn" class="main-action-btn">
+                        ACTIVAR EMISIÓN
+                    </button>
+                </div>
+
+                <div class="info-panel">
+                    <p id="status-text">Sistema en espera</p>
+                    <small>⚠️ El volumen depende del hardware de tu dispositivo.</small>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>WebApp Estática • <a href="https://github.com/tuusuario/repo" target="_blank">Ver en GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
