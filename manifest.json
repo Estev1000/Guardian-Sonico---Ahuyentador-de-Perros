@@ -1,0 +1,15 @@
+{
+  "name": "Guardian Sónico",
+  "short_name": "Guardian",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#00d2ff",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/32/32223.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
