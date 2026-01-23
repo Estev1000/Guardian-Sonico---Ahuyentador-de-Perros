@@ -4,12 +4,14 @@ class SonicGuardian {
         this.oscillator = null;
         this.gainNode = null;
         this.isPlaying = false;
-        this.mode = 'dog'; // dog, puma, manual
+        this.mode = 'dog'; // dog, sweep, manual
         this.sweepInterval = null;
 
         // Settings
         this.frequencies = {
             dog: 16500, // Borderline audible - annoying
+            sweepMin: 18000,
+            sweepMax: 23000,
         };
 
         // UI Elements
@@ -110,6 +112,9 @@ class SonicGuardian {
         if (this.mode === 'dog') {
             this.setFrequency(this.frequencies.dog);
             this.statusText.innerText = "Emisión Constante: Anti-Canino";
+        } else if (this.mode === 'sweep') {
+            this.startSweep();
+            this.statusText.innerText = "Modo Barrido: 18kHz - 23kHz";
         } else {
             const manualFreq = document.getElementById('freq-slider').value;
             this.setFrequency(manualFreq);
@@ -128,8 +133,32 @@ class SonicGuardian {
         this.hzDisplay.innerText = Math.round(val) + " Hz";
     }
 
-    startPumaSweep() {
-        // Removed
+    startSweep() {
+        if (!this.oscillator) return;
+
+        const cycleDuration = 0.5; // seconds for one up-down cycle
+        const now = this.audioCtx.currentTime;
+
+        // Initial set
+        this.oscillator.frequency.setValueAtTime(this.frequencies.sweepMin, now);
+
+        // Loop for the sweep using AudioParam automation
+        // We schedule ahead a bit. 
+        // Since we can't easily loop automation without recreating nodes or using a custom interval,
+        // we will use a setInterval to schedule regular ramps.
+
+        const scheduleRamp = () => {
+            const t = this.audioCtx.currentTime;
+            // Ramp Up
+            this.oscillator.frequency.linearRampToValueAtTime(this.frequencies.sweepMax, t + cycleDuration / 2);
+            // Ramp Down
+            this.oscillator.frequency.linearRampToValueAtTime(this.frequencies.sweepMin, t + cycleDuration);
+
+            this.updateDisplay("BARRIDO");
+        };
+
+        scheduleRamp(); // First run
+        this.sweepInterval = setInterval(scheduleRamp, cycleDuration * 1000);
     }
 
     stopSweep() {
@@ -172,6 +201,7 @@ class SonicGuardian {
         // Update styling variables
         const root = document.documentElement;
         let color = '#00d2ff'; // dog
+        if (newMode === 'sweep') color = '#ff4d4d'; // Red-ish for aggressive sweep
         if (newMode === 'manual') color = '#ffd700';
 
         root.style.setProperty('--accent-active', color);
